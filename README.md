@@ -1,6 +1,4 @@
-# Route Resilience
-
-**Uncertainty-Aware Road Network Reconstruction, Live Road-Status Integration & Emergency Accessibility Analysis**
+# Route Resilience: Uncertainty-Aware Road Network Reconstruction, Live Road-Status Integration & Emergency Accessibility Analysis
 
 **Timeline:** 6 weeks / 42 days  
 **Team:** 3 developers  
