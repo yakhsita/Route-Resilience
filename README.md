@@ -54,7 +54,6 @@ The team's submitted slide deck (`yak_ps.pdf`, pp. 3–10) is a useful design re
 | Dashboard mockup (p. 7) | Use the slide's layout as a visual reference: left-side layer controls, center road graph/map, right-side resilience metrics, bottom before/after plot. Rebuild rather than treating the mockup as working software. | Core |
 | Four-layer architecture (p. 8) | Data → extraction → graph → analytics/dashboard; extend with an independent **live event ingestion and matching** branch. | Core |
 | Proposed Next.js/FastAPI/PostgreSQL/Redis stack (p. 9) | Treat as a possible production architecture, **not a six-week requirement**. Streamlit + NetworkX + lightweight API polling is simpler for three laptops. | Later |
-| ₹12,500 indicative budget (p. 10) | A slide estimate, **not a confirmed cost**. Use local RTX 3050 and free/open tools first; validate provider costs and licenses before spending. | Planning |
 
 **Source boundary:** The PDF is a proposed pitch/deck, not evidence that the listed algorithms, datasets, API coverage, accuracy, or flood forecasts already work. It mentions Sentinel-2, Cartosat, SAR, OSM and DEM; the precise availability, spatial resolution, alignment, and permitted usage of each dataset must be checked independently. The satellite image shown on p. 4 is an explanatory example, not a verified training pair.
 
