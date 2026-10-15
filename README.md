@@ -551,7 +551,7 @@ A teammate can clone the project, install documented dependencies, open a prepar
 3. Recompute routes/criticality when incident state changes; distinguish actual provider reports from simulations.
 4. Provide a single reproducible CLI entry point such as `python -m src.pipeline --image ... --events ...` **after implementing it**. Add integration tests for stale reports, no events, unmatched incidents, and unreachable hospitals.
 
-**Week 6: dashboard, owned by you**
+**Week 6: dashboard, by you**
 
 1. Implement `app/dashboard.py` in Streamlit after JSON/CLI outputs are stable.
 2. Tabs: Imagery & Segmentation; Reconstructed Network; Criticality; Live/Reported Status; What-if Closures; Evaluation.
