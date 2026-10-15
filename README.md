@@ -1,4 +1,6 @@
-# Route Resilience: Uncertainty-Aware Road Network Reconstruction, Live Road-Status Integration & Emergency Accessibility Analysis
+# Route Resilience
+
+**Uncertainty-Aware Road Network Reconstruction, Live Road-Status Integration & Emergency Accessibility Analysis**
 
 **Timeline:** 6 weeks / 42 days  
 **Team:** 3 developers  
@@ -62,15 +64,19 @@ The team's submitted slide deck (`yak_ps.pdf`, pp. 3–10) is a useful design re
 
 Evaluate **three separate contributions**: (1) road-mask/topology accuracy, (2) criticality and resilience sensitivity to failures, and (3) timeliness and correctness of provider-attributed event-to-road updates. Do not claim a single unmeasured end-to-end improvement.
 
-## 2. Team and laptop allocation
+## 2. Revised team division: core engineering first, dashboard last
 
-| Owner | Laptop | Primary responsibility | Deliverables |
+**The interactive dashboard is owned by the integration lead and begins in Week 6.** Until then, use CLI commands, notebooks, saved PNGs, GeoJSON/JSON files, and pytest for output. The three core modules are developed **in parallel**, using agreed fixtures.
+
+| Owner | Primary work | Computing | Contract/deliverable |
 |---|---|---|---|
-| **You: ML + integration lead** | i5-13450HX, 16 GB RAM, RTX 3050 6 GB | Dataset, U-Net segmentation, occlusion experiments, graph/imagery alignment, integration and release | `road_mask.png`, `inferred_links.json`, model weights, evaluation report |
-| **Teammate 1: graph + live-feed backend** | i5-8250U, 16 GB RAM, Intel UHD 620 | Graph construction, Dijkstra, criticality, live API adapter, map matching, status update logic | `road_graph.geojson` or JSON, normalized events, routing and incident tests |
-| **Teammate 2: dashboard + QA** | i3-1115G4, 4 GB RAM, integrated graphics | Streamlit, overlays, event badges, status freshness, controls, presentation and end-to-end tests | Dashboard and demo workflow |
+| **You — graph, topology, integration, final dashboard** | Skeletonization, pixel/geospatial graph building, Dijkstra, topological gap validation, edge/node criticality, emergency accessibility, module integration; Streamlit in Week 6 | RTX 3050 laptop (CPU sufficient for graph tasks; GPU available for troubleshooting) | `road_graph.json`, `analysis.json`, reproducible CLI pipeline, final dashboard |
+| **Teammate 1 — satellite AI/ML** | Dataset licensing/splits, preprocessing, lightweight U-Net, training, inference, segmentation evaluation, occlusion robustness experiments | Google Colab/Kaggle cloud GPU **if available**, otherwise your RTX 3050 for agreed training windows | `road_mask.png`, training/inference scripts, checkpoint metadata, IoU/F1 report |
+| **Teammate 2 — live status and geospatial data** | Verify authorized incident provider and area coverage, normalize event records, geographic map matching, refresh/staleness handling, status overlays, event replay and API tests | Local CPU laptop (4 GB RAM is enough for API tests); cloud notebook optional | `road_events.json`, `matched_events.json`, feed adapter, provider feasibility report |
 
-All teammates work from small **mock fixtures** immediately; live data access and ML training must not block other modules.
+**Collaboration:** Teammate 1 must not wait for graph code; Teammate 2 must not wait for real ML output. You must not wait for either: begin with a small synthetic graph and a fixed mask. Share interface contracts on Day 1. The owner of the dashboard is **you**, not Teammate 2.
+
+**Cloud notebook policy:** Keep the source of truth in GitHub, not in ephemeral Colab sessions. Mount data from an approved source, save checkpoints and predictions to durable storage, and record model version, dataset split, seed, and library versions. Never commit tokens or private datasets. Cloud GPU availability, quotas, and session lifetime are not guaranteed; keep a CPU or local-GPU fallback. Do not run heavy training on the 4 GB laptop.
 
 ## 3. The real-time data decision: do this in Week 1
 
@@ -96,59 +102,57 @@ A reliable live module needs a **provider that actually covers the chosen study 
 
 **Go/no-go by Day 7:** If no suitable authorized feed covers the selected area, either (a) choose another supported demonstration area, or (b) present **historical event replay plus live polling infrastructure** and explicitly say real-time closure coverage is unverified. Do not silently substitute simulations for live data.
 
-## 4. Six-week schedule (42 days)
+## 4. Revised six-week schedule (42 days) — core first
 
-### Week 1 — Project setup, feasibility, and API proof (Days 1–7)
+### Week 1 — Agreements and feasibility (Days 1–7)
 
-**ML lead:** Set up repo and Python; select a permitted high-resolution road dataset; inspect masks and georeferencing; build image loader; check whether paired optical/SAR data is actually feasible.  
-**Graph/live lead:** Build a synthetic 10–20-node graph; implement Dijkstra; investigate and test provider access for the target study area; record response schema and coverage.  
-**UI lead:** Build Streamlit shell with image, layers, event panel, and a clearly labeled simulated closure button.
+- **You:** Create repository, `schemas.py`, synthetic 10–20-node graph, Dijkstra CLI and edge-removal tests. Set exact coordinate and edge-ID conventions.
+- **Teammate 1:** Choose a licensed road imagery dataset, inspect image/mask pairs, create geographically separated train/validation/test splits, set up cloud notebook and verify training device. Export one sample `road_mask.png`.
+- **Teammate 2:** Test actual provider access for the chosen study area. Record endpoint, auth, quotas, coverage, incident geometry, timestamps, terms and a redacted sample response. Define normalized event schema.
 
-**Gate:** At least one working synthetic reroute; provider selection documented with evidence; sample event JSON normalized (live or recorded).
+**Gate:** Synthetic rerouting works; mask and event fixtures validate; live-provider go/no-go is documented. Do not postpone provider feasibility to Week 4.
 
-### Week 2 — Baseline AI + road graph (Days 8–14)
+### Week 2 — First working components (Days 8–14)
 
-**ML lead:** Train or fine-tune lightweight U-Net on small image tiles (start with 256×256, batch size 2–4 as memory permits); save road masks and metrics.  
-**Graph/live lead:** Implement skeleton-to-graph conversion and edge removal; create provider adapter interface and parser with mocked responses.  
-**UI lead:** Add observed road mask and graph overlay, route selectors, criticality cards, and mock events.
+- **You:** Skeleton-to-graph conversion, junction/endpoints, graph connectivity, weighted Dijkstra and CLI output. Validate paths on small known masks.
+- **Teammate 1:** Train lightweight U-Net baseline (e.g., 256×256 tiles; adjust batch to available VRAM), run inference, report IoU/F1 on held-out images.
+- **Teammate 2:** Implement provider adapter, event normalization, polling client, deduplication and fixture-based tests. If live access is unavailable, retain replay as a **clearly labelled fallback**, not a live-data claim.
 
-**Gate:** Image -> mask -> graph -> route on a reproducible small study tile. Mock event -> edge status -> reroute also works.
+**Gate:** Image/mask → graph → shortest path in CLI; separately provider/fixture → normalized event JSON.
 
-### Week 3 — Reconstruction + graph criticality (Days 15–21)
+### Week 3 — Occlusion recovery and network criticality (Days 15–21)
 
-**ML lead:** Simulate occlusion over known roads; propose missing links; store **heuristic** confidence and evaluate false positives.  
-**Graph/live lead:** Add bridges, articulation points, edge/node betweenness, node ablation, edge-removal impact, connectivity, and emergency-destination reachability; test union-find/MST on plausible link candidates.  
-**UI lead:** Add confidence filter, observed/inferred legend, critical-road ranking, before/after comparison, and a clearly defined resilience-index panel.
+- **You:** Candidate link geometry, endpoint direction and proximity checks; bridges, articulation points, betweenness, edge/node ablation and resilience-index definition. Reject unsupported links rather than forcing full connectivity.
+- **Teammate 1:** Run controlled artificial-occlusion tests on known roads; compare no-repair vs reconstruction; measure false connections and correct recovered links. Coordinate inferred-link format with you.
+- **Teammate 2:** Implement incident-to-edge matching on a **georeferenced** sample graph, match-distance thresholds, ambiguity handling, and test cases for unmatched incidents.
 
-**Gate:** Demonstrate reconstruction against known hidden roads, candidate-link rejection, edge/node failure analysis, and one simulated closure with measured connectivity effects. Do **not** connect components just to make the graph fully connected.
+**Gate:** A tested missing-road scenario, graph criticality ranking, and one incident matched (or explicitly unmatched) to a known road segment.
 
-### Week 4 — Live status integration (Days 22–28)
+### Week 4 — Dynamic status and backend integration (Days 22–28)
 
-**Graph/live lead (primary):** Implement actual authorized provider request, normalization, polling with a documented interval, deduplication, timestamps, event expiry, and event-to-road map matching. Store API credentials in environment variables.  
-**ML lead:** Align the road graph to geographic coordinates **only when source imagery has valid georeferencing**; help validate map matching; otherwise use an independently georeferenced base graph for the live layer and document that choice.  
-**UI lead:** Display provider attribution, last updated time, stale-feed warning, and event geometry; add a manual refresh control.
+- **You:** Integrate segmentation outputs, reconstructed links and graph analytics. Build backend function that accepts affected edge IDs and recalculates routes, accessibility and criticality.
+- **Teammate 1:** Finalize inference pipeline and metadata; run on the selected study area; assist with georeferencing only where valid. Freeze a reproducible baseline checkpoint.
+- **Teammate 2:** Connect provider polling → normalized events → map matching → graph-status updates; implement timestamps, freshness, expiration, API errors and recorded replay.
 
-**Gate:** A real provider request (if available) reaches the UI and updates graph edge states. No fabricated live events.
+**Gate:** One reproducible **headless** end-to-end run: prepared image → graph + status events → updated routing results, saved to JSON. No dashboard needed yet.
 
-### Week 5 — Dynamic routing and robustness (Days 29–35)
+### Week 5 — Accuracy, reliability and complete core pipeline (Days 29–35)
 
-- Event status -> affected edges -> shortest-path recalculation.
-- Recompute emergency accessibility and criticality impact after event updates.
-- Avoid falsely closing a whole road when an incident point has ambiguous location: mark as **unmatched / needs review**.
-- Support multiple incidents, duplicate updates, API timeouts, empty responses, and expired events.
-- Add optional incident replay mode for deterministic demos.
-- Compare routing before/after events; log fetch latency and freshness.
+- **You:** Integrate emergency destinations, rerouting, criticality stress tests, CLI entry point and automated end-to-end tests. Resolve edge-ID, CRS and coordinate mismatches.
+- **Teammate 1:** Compare baselines, finalize held-out evaluation, document false positives and limitations. Export sample images/masks and lightweight inference artifacts.
+- **Teammate 2:** Test real provider requests when available; validate map matching, deduplication, stale-feed behavior, event expiration and latency. Provide attributed replay fixtures for deterministic demo.
 
-**Gate:** Reproducible end-to-end demonstration for live provider data **or explicitly labeled replay**, plus automated tests.
+**Gate:** **Core-engine freeze by Day 35.** Command-line demo and evaluation must work independently of Streamlit. If provider coverage is missing, say so explicitly and demonstrate replay separately.
 
-### Week 6 — Evaluation, report, and polished presentation (Days 36–42)
+### Week 6 — Dashboard by you, documentation by teammates (Days 36–42)
 
-- **Days 36–38:** Quantitative ML and graph evaluation (including no-repair vs heuristic repair, false connections, node ablation and defined resilience index); incident map-matching accuracy; feed latency/freshness tests; edge cases.
-- **Days 39–40:** Fix UX, prepare architecture diagrams, screenshots, video, installation instructions, and slides.
-- **Day 41:** Feature freeze and clean-install rehearsal on teammate's machine.
-- **Day 42:** Final presentation and release tag.
+- **You:** Build Streamlit + Plotly/Folium dashboard over stable backend APIs: imagery/mask/graph layers, inferred-link confidence, criticality ranking, provider attribution and freshness, simulated vs reported closures, before/after routes. Keep UI separate from model training and polling.
+- **Teammate 1:** Package ML instructions, checkpoints, inference outputs, plots, methodology, and benchmark tables; support integration debugging.
+- **Teammate 2:** Package provider setup, event samples, rate-limit/staleness documentation, integration tests and failure-mode evidence; support final demo.
+- **Days 40–41:** Clean-install test, presentation rehearsal, feature freeze, screenshots and recorded fallback.
+- **Day 42:** Final demonstration and tagged release.
 
-**Fallback rule:** If AI training underperforms, use a **clearly labeled reference road mask** for graph demonstration; if the live API is unavailable, demonstrate honest recorded replay and report the limitation.
+**Critical fallback:** If the dashboard runs late, the Week 5 CLI demo remains valid. If training fails, use a clearly labelled reference mask; if live provider data is unavailable, label the incident demo **REPLAY**, not LIVE.
 
 ## 5. Recommended stack
 
@@ -217,6 +221,19 @@ route-resilience/
 ```
 
 These are **proposed modules**; the README does not imply that the code already exists.
+
+## 6A. Core-first deliverables and integration commands
+
+Before the dashboard, each module must expose a deterministic callable Python function or CLI script:
+
+1. **ML:** `image → road_mask.png` with inference metadata and held-out evaluation.
+2. **Graph:** `road_mask.png + optional inferred_links.json → road_graph.json`; `road_graph.json + closures → analysis.json`.
+3. **Live/geospatial:** `provider response → road_events.json → matched_events.json`, preserving source, timestamps, coordinate reference system and match confidence.
+4. **Integration:** `graph + matched events + destination nodes → updated graph and before/after accessibility report`.
+
+These are **interface targets**, not commands that already exist. Agree on names and arguments in `docs/decisions.md` before writing scripts. Test the interfaces using tiny sample fixtures and avoid copying notebooks manually between teammates.
+
+**Minimum shared tests:** empty road mask; isolated node; disconnected components; ambiguous incident location; stale event; duplicate event; no closure events; invalid CRS; low-confidence inferred link; missing hospital node. Report pixel-distance results as pixels until georeferencing is validated.
 
 ## 7. Setup for each teammate
 
@@ -459,3 +476,175 @@ Daily 10–15-minute stand-up: completed, next, blocked. Save a known-good demo 
 A teammate can clone the project, install documented dependencies, open a prepared study area, inspect road extraction and inferred links, view criticality, see **provider-attributed automatically refreshed events if a verified feed is available**, and reproduce a route update. The UI reliably distinguishes **live**, **recorded replay**, **simulated**, **inferred**, **stale**, and **unreported** data.
 
 **If no verified real-time provider is accessible for the study area, the project cannot honestly claim real-time road-status coverage.** Report the limitation, show the functioning integration layer with recorded events, and seek an alternative provider or geography.
+
+---
+
+## 14. Cloud notebook requirements and limits (read before starting)
+
+**No dedicated local GPU is required to use Google Colab or Kaggle Notebooks.** Computation runs on remote machines. The teammate needs a working browser, account access, and a reliable internet connection. A 4 GB RAM laptop can use the browser, but large uploads, many browser tabs, or local image processing may still be slow. Free GPU access is **not guaranteed**: hardware, quotas, session length, and availability vary. The runtime's RAM, disk, and GPU are different from the laptop's. A cloud notebook is not permanent storage.
+
+**ML lead's cloud setup:**
+
+1. Sign into Google Colab at https://colab.research.google.com/ and create `notebooks/01_dataset.ipynb` (or a Kaggle notebook if Colab GPU is unavailable).
+2. Choose **Runtime → Change runtime type → T4 GPU** or another available GPU. If the GPU option is missing, try a CPU preprocessing session and schedule GPU training later; do not assume free GPUs are always available.
+3. In a code cell, run:
+
+   ```python
+   import torch
+   print('PyTorch:', torch.__version__)
+   print('CUDA available:', torch.cuda.is_available())
+   if torch.cuda.is_available():
+       print('GPU:', torch.cuda.get_device_name(0))
+   ```
+
+4. Clone the shared GitHub repository **inside the notebook runtime** (replace the URL):
+
+   ```python
+   !git clone https://github.com/YOUR-ORG/route-resilience.git
+   %cd route-resilience
+   !pip install -q numpy opencv-python-headless scikit-image pillow matplotlib pandas
+   ```
+
+5. Download datasets only from authorized, licensed sources. Save persistent datasets/checkpoints in Google Drive or another permitted durable location; use `/content/` only for temporary working copies. To mount Drive in Colab:
+
+   ```python
+   from google.colab import drive
+   drive.mount('/content/drive')
+   ```
+
+6. Save a checkpoint at the end of every training epoch or sensible interval, plus a CSV of loss/metrics. Restarting a runtime may erase everything in its temporary disk.
+7. Download/export final `road_mask.png`, the checkpoint, dataset split manifest, and metrics report. Push **source code and small fixtures** to GitHub, not raw datasets or large `.pth` files.
+8. Keep inference runnable on CPU (slower is fine), so the final demo does not require an active Colab session.
+
+**Graph lead (you):** NetworkX and scikit-image work on CPU; Colab is optional. Your RTX 3050 is a backup training resource, not a dependency for graph work.
+
+**Live-data lead:** Cloud notebooks can test API parsing, but are poor choices for an always-on live poller because sessions disconnect. Build a restartable local Python command for fetching one snapshot; later the final dashboard can trigger controlled refreshes. Never put an API key directly in a shared notebook. Use environment variables or the notebook platform's secrets feature. Respect the provider's rate limits.
+
+## 15. Detailed owner playbooks: what to build, in what order
+
+### A. You — graph, topology, criticality, integration, final dashboard
+
+**Week 1: synthetic graph first**
+
+1. Create `src/graph/routing.py`. Make a 10–20 node NetworkX graph with positive edge lengths and implement `shortest_route(graph, source, target, excluded_edges=None)`.
+2. Create `tests/test_routing.py` covering normal path, alternate path after removal, and disconnected source/target.
+3. Write `data/samples/road_graph.json` conforming to Section 8. Confirm with both teammates that IDs, coordinates, CRS, edge units, and statuses are understood.
+4. Print route path, path cost, and unreachable destinations to the terminal. No dashboard yet.
+
+**Week 2: image mask to graph**
+
+1. Implement `src/graph/build_graph.py`: threshold binary road mask, skeletonize, detect endpoints/junctions, trace segments, and construct nodes/edges.
+2. Preserve polyline geometry and **pixel length**; avoid inventing meter distances for ungeoreferenced tiles.
+3. Test a straight road, T-junction, loop, disconnected roads, and crossing that should/shouldn't connect.
+4. Export a graph JSON plus a diagnostic PNG overlay for ML lead review.
+
+**Week 3: reconstruction and criticality**
+
+1. Implement `src/graph/topology.py` to generate plausible endpoint connections using gap distance, direction continuity, and nearby image evidence. Use MST/Disjoint Set only to manage candidates/components; **do not connect every component automatically**.
+2. Label each accepted connection `inferred`, with a heuristic confidence and a reason. Keep observed roads unchanged.
+3. Implement `src/graph/criticality.py`: connected components, bridges, edge/node removal tests, betweenness centrality, and before/after accessibility to chosen destinations.
+4. Define and document a specific Resilience Index with its denominator and treatment of unreachable destinations. Compare scores with and without inferred links.
+
+**Weeks 4–5: integration**
+
+1. Agree with live-data lead on `matched_events.json` and edge-ID matching.
+2. Apply only adequately matched, current, provider-reported closures to the relevant graph scenario; preserve baseline graph for comparison.
+3. Recompute routes/criticality when incident state changes; distinguish actual provider reports from simulations.
+4. Provide a single reproducible CLI entry point such as `python -m src.pipeline --image ... --events ...` **after implementing it**. Add integration tests for stale reports, no events, unmatched incidents, and unreachable hospitals.
+
+**Week 6: dashboard, owned by you**
+
+1. Implement `app/dashboard.py` in Streamlit after JSON/CLI outputs are stable.
+2. Tabs: Imagery & Segmentation; Reconstructed Network; Criticality; Live/Reported Status; What-if Closures; Evaluation.
+3. Show a legend: observed, inferred, reported closure, simulated closure, stale/unavailable. Show source and last-update time for every live event.
+4. Make a reliable offline/replay demo mode, clearly labelled **replay**; test before presentation.
+
+**Your acceptance checklist:** graph extraction works on at least one predicted mask; all graph algorithms pass tests; real feed changes trigger correct recomputation; dashboard is a consumer of stable outputs, not where algorithms are implemented.
+
+### B. Teammate 1 — satellite ML and occlusion experiments (Colab GPU)
+
+**Week 1: data and setup**
+
+1. Find a legally reusable high-resolution road extraction dataset with image/mask labels; record source URL, license, image resolution, and geographic coverage in `data/README.md`.
+2. Check that labels align with imagery and that roads are distinguishable at the chosen resolution.
+3. Split by geography into train/validation/test areas where possible; record the split manifest to avoid leakage.
+4. Create a Colab notebook that loads an image and mask, visualizes both, and reports dimensions and class balance.
+
+**Week 2: U-Net baseline**
+
+1. Implement dataset loader and consistent preprocessing for image and mask. Resize/crop to small tiles (e.g. 256×256) for 6 GB-class GPUs or variable Colab GPU capacity.
+2. Train a small U-Net with a suitable road/background loss; log training/validation loss, IoU, precision, recall, and F1.
+3. Save the best checkpoint to durable storage and generate `road_mask.png` on a **held-out** tile.
+4. Supply the graph lead with an original image, predicted mask, reference mask, and prediction metadata. Agree on binary mask convention `0/255`.
+
+**Week 3: occlusion robustness**
+
+1. Build controlled experiments by masking known road segments with synthetic tree/shadow-like patches or occlusion masks.
+2. Compare a baseline segmentation result against a reconstruction-assisted output using the same hidden ground truth.
+3. Measure recovered true connections **and false positive connections**; save visual before/after examples.
+4. Provide confidence evidence; if scores are heuristics, label them as heuristics rather than calibrated probabilities.
+
+**Weeks 4–5: reliability and packaging**
+
+1. Tune only after a baseline is reproducible; avoid switching to large transformer models unless time permits.
+2. Implement `src/ml/predict.py` so the graph lead can run inference on a prepared tile; add CPU fallback.
+3. Deliver model version, preprocessing parameters, split manifest, test metrics, inference instructions, and at least three example outputs.
+4. Test on a fresh geographic tile not used in training.
+
+**Week 6:** Help verify segmentation overlays, finalize ML results and failure-case analysis, and document how to reproduce inference. Do not take over dashboard implementation.
+
+**ML acceptance checklist:** another teammate can run inference on a prepared image; predictions align spatially; reported IoU/F1 are from held-out data; checkpoints are backed up; road reconstruction gains are evaluated against ground truth.
+
+### C. Teammate 2 — real road-status feed and geospatial matching
+
+**Week 1: feasibility gate (highest priority)**
+
+1. Choose a candidate study area jointly with the team; **do not assume Bengaluru has a suitable publicly accessible closure API**.
+2. Investigate authorized road incident/closure providers or official data feeds. For each, document: coverage area, types of incidents, access method, license, pricing, rate limit, update frequency, event coordinates/geometry, and whether real closure events are returned.
+3. Run a permitted sample request. Save a **sanitized** response without secrets or personal information. Record fetch time and provider event timestamp separately.
+4. By Day 7 present a clear **go/no-go**: provider + supported area + evidence of usable data. If unavailable, select a supported city with team approval or implement an attributed replay mode; never claim replay is live.
+
+**Week 2: normalized event adapter**
+
+1. Implement `src/live/provider_client.py` with timeouts, response validation, retry/backoff, and configurable polling limits.
+2. Convert provider-specific fields to `road_events.json`: stable ID, type, reported status, geometry, source, event timestamp, fetched timestamp, expiry (if known), and confidence/quality metadata.
+3. Save a small fixture in `data/samples/` and add tests for empty results, malformed payloads, rate limits, and duplicate IDs.
+
+**Week 3: incident-to-road matching**
+
+1. Work with the graph lead to ensure **both** events and graph geometries use compatible CRS. A pixel-only graph cannot reliably match latitude/longitude incidents without georeferencing or an explicit map transformation.
+2. Implement `src/live/map_match.py` to select candidate edges within a defined tolerance, considering event geometry, direction, and road identity where available.
+3. Output `matched_events.json` with candidate edge IDs, match confidence, and an `unmatched` state. Do not automatically close an ambiguous edge.
+4. Test with known point/line incidents, intersections, parallel roads, and out-of-area events.
+
+**Week 4: automatic status update**
+
+1. Implement a refreshable snapshot function (not an endless loop in a notebook). Track event creation/update times and last successful fetch.
+2. Define rules for `reported_closed`, `reported_restricted`, `unknown`, `stale`, and `unmatched`.
+3. Send only well-matched current closures to graph lead's scenario updater; do not treat absence of reports as proof that roads are open.
+4. Create a clearly labelled historical/replayed fixture for demonstrations during API outages.
+
+**Week 5: integration and verification**
+
+1. Demonstrate: new provider event → normalized event → matched edge → graph closure → rerouting.
+2. Test expired reports, changed provider status, feed outage, quota failure, and duplicate events.
+3. Record measured polling interval and observed event latency; avoid promising instantaneous coverage.
+
+**Week 6:** Help validate live event cards, timestamps, attribution, and status legend in the dashboard. Write provider limitations and reproducibility notes.
+
+**Live-data acceptance checklist:** evidence of a permitted real feed for the chosen area or an honestly labelled replay; tests for matching and freshness; no secrets committed; current status never inferred solely from satellite imagery.
+
+## 16. Shared weekly handoff and team leadership routine
+
+| Checkpoint | You submit | ML teammate submits | Live-data teammate submits |
+|---|---|---|---|
+| End Week 1 | Synthetic graph + Dijkstra tests | Dataset license + image/mask notebook | Provider feasibility report + sample response |
+| End Week 2 | Mask-to-graph JSON + overlay | Trained baseline + held-out prediction | Normalized event JSON + API tests |
+| End Week 3 | Inferred links + criticality report | Occlusion experiment + error metrics | Map-matched event JSON + ambiguity tests |
+| End Week 4 | Graph status updater + CLI | Improved/reproducible inference | Refresh/staleness handler + integration fixture |
+| End Week 5 | Complete backend pipeline + integration tests | Model and evaluation package | Verified live/replay scenario + latency report |
+| End Week 6 | Dashboard + presentation | ML report and visuals | Provider report and demo support |
+
+**Daily check-in (10 minutes):** Each teammate reports one completed output, one next task, and one blocker. **Twice weekly:** run tests on `main` and review interfaces. **Weekly:** show an actual artifact (code, test, image, JSON, or report), not only verbal progress. Use GitHub Issues with owner, due date, and acceptance test. Keep the Day 7 provider decision visible to everyone.
+
+**Team lead rule:** If the live-data provider cannot be validated by Day 7, do not quietly postpone the decision until Week 5. Re-scope the supported study area or explicitly separate live integration from the replay demonstration.
