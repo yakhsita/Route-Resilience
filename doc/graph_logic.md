@@ -23,7 +23,28 @@ Route-Resilience/
 ├── outputs/
 └── requirements.txt
 ```
-
+## Graph integration
+```
+koramangala_roads.graphml
+          |
+          v
+   OSM MultiDiGraph
+          |
+          +---------------------------+
+          |                           |
+          v                           v
+ Directed routing graph       Undirected structural graph
+          |                           |
+          v                           v
+  Custom Dijkstra              Bridge detection
+  Vehicle rerouting            Articulation points
+  Directed closures            Connectivity resilience
+          |                           |
+          +-------------+-------------+
+                        |
+                        v
+            Route Resilience results
+```
 ## Commands 
 
 bash
