@@ -143,6 +143,96 @@ def draw_graph(graph, path=None):
     plt.show()
 
 
+
+def dijkstra_osm(graph, start, destination, weight="length"):
+    """
+    Custom Dijkstra for directed or undirected NetworkX graphs.
+
+    Supports Graph, DiGraph, MultiGraph and MultiDiGraph.
+    For parallel edges, uses the minimum available weight.
+    """
+    import heapq
+    import math
+
+    if start not in graph or destination not in graph:
+        raise ValueError("Invalid start or destination node")
+
+    if graph.is_multigraph():
+        edges = graph.edges(keys=True, data=True)
+        for u, v, key, data in edges:
+            cost = data.get(weight)
+            if (
+                isinstance(cost, bool)
+                or not isinstance(cost, (int, float))
+                or not math.isfinite(cost)
+                or cost <= 0
+            ):
+                raise ValueError(
+                    f"Invalid {weight} on edge {(u, v, key)}"
+                )
+    else:
+        for u, v, data in graph.edges(data=True):
+            cost = data.get(weight)
+            if (
+                isinstance(cost, bool)
+                or not isinstance(cost, (int, float))
+                or not math.isfinite(cost)
+                or cost <= 0
+            ):
+                raise ValueError(
+                    f"Invalid {weight} on edge {(u, v)}"
+                )
+
+    distances = {start: 0.0}
+    previous = {}
+    queue = [(0.0, 0, start)]
+    counter = 1
+
+    while queue:
+        current_distance, _, current = heapq.heappop(queue)
+
+        if current_distance > distances[current]:
+            continue
+
+        if current == destination:
+            break
+
+        for neighbor, edge_data in graph.adj[current].items():
+            if graph.is_multigraph():
+                edge_weight = min(
+                    attributes[weight]
+                    for attributes in edge_data.values()
+                )
+            else:
+                edge_weight = edge_data[weight]
+
+            new_distance = current_distance + edge_weight
+
+            if new_distance < distances.get(neighbor, math.inf):
+                distances[neighbor] = new_distance
+                previous[neighbor] = current
+                heapq.heappush(
+                    queue,
+                    (new_distance, counter, neighbor)
+                )
+                counter += 1
+
+    if destination not in distances:
+        return [], math.inf
+
+    path = []
+    current = destination
+
+    while current != start:
+        path.append(current)
+        current = previous[current]
+
+    path.append(start)
+    path.reverse()
+
+    return path, distances[destination]
+
+
 if __name__ == "__main__":
     graph = create_graph()
 
