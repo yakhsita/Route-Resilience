@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "coordinate_system": "pixel",
+  "source": "synthetic",
+  "directed": false,
+  "nodes": [
+    {
+      "id": "A"
+    },
+    {
+      "id": "B"
+    },
+    {
+      "id": "C"
+    },
+    {
+      "id": "D"
+    },
+    {
+      "id": "E"
+    },
+    {
+      "id": "F"
+    },
+    {
+      "id": "G"
+    },
+    {
+      "id": "H"
+    },
+    {
+      "id": "I"
+    },
+    {
+      "id": "J"
+    }
+  ],
+  "edges": [
+    {
+      "source": "A",
+      "target": "B",
+      "weight": 4
+    },
+    {
+      "source": "A",
+      "target": "D",
+      "weight": 2
+    },
+    {
+      "source": "B",
+      "target": "C",
+      "weight": 3
+    },
+    {
+      "source": "B",
+      "target": "E",
+      "weight": 6
+    },
+    {
+      "source": "C",
+      "target": "F",
+      "weight": 2
+    },
+    {
+      "source": "C",
+      "target": "J",
+      "weight": 5
+    },
+    {
+      "source": "D",
+      "target": "E",
+      "weight": 3
+    },
+    {
+      "source": "D",
+      "target": "G",
+      "weight": 5
+    },
+    {
+      "source": "E",
+      "target": "F",
+      "weight": 4
+    },
+    {
+      "source": "E",
+      "target": "H",
+      "weight": 2
+    },
+    {
+      "source": "F",
+      "target": "I",
+      "weight": 3
+    },
+    {
+      "source": "F",
+      "target": "J",
+      "weight": 2
+    },
+    {
+      "source": "G",
+      "target": "H",
+      "weight": 4
+    },
+    {
+      "source": "H",
+      "target": "I",
+      "weight": 2
+    }
+  ]
+}

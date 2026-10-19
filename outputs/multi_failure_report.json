@@ -1,0 +1,457 @@
+{
+  "network": "synthetic_10_node",
+  "scenario_results": [
+    {
+      "closed_roads": [
+        [
+          "A",
+          "D"
+        ]
+      ],
+      "closure_count": 1,
+      "origin": "A",
+      "destination": "I",
+      "original_route": [
+        "A",
+        "D",
+        "E",
+        "H",
+        "I"
+      ],
+      "original_distance": 9,
+      "new_route": [
+        "A",
+        "B",
+        "C",
+        "F",
+        "I"
+      ],
+      "new_distance": 12,
+      "route_reachable": true,
+      "route_detour_pct": 33.3333,
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 20.9428,
+      "maximum_detour_pct": 550.0,
+      "components_after": 1
+    },
+    {
+      "closed_roads": [
+        [
+          "H",
+          "I"
+        ]
+      ],
+      "closure_count": 1,
+      "origin": "A",
+      "destination": "I",
+      "original_route": [
+        "A",
+        "D",
+        "E",
+        "H",
+        "I"
+      ],
+      "original_distance": 9,
+      "new_route": [
+        "A",
+        "D",
+        "E",
+        "F",
+        "I"
+      ],
+      "new_distance": 12,
+      "route_reachable": true,
+      "route_detour_pct": 33.3333,
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 15.4605,
+      "maximum_detour_pct": 350.0,
+      "components_after": 1
+    },
+    {
+      "closed_roads": [
+        [
+          "D",
+          "E"
+        ],
+        [
+          "G",
+          "H"
+        ]
+      ],
+      "closure_count": 2,
+      "origin": "A",
+      "destination": "I",
+      "original_route": [
+        "A",
+        "D",
+        "E",
+        "H",
+        "I"
+      ],
+      "original_distance": 9,
+      "new_route": [
+        "A",
+        "B",
+        "C",
+        "F",
+        "I"
+      ],
+      "new_distance": 12,
+      "route_reachable": true,
+      "route_detour_pct": 33.3333,
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 40.6675,
+      "maximum_detour_pct": 375.0,
+      "components_after": 1
+    },
+    {
+      "closed_roads": [
+        [
+          "B",
+          "C"
+        ],
+        [
+          "D",
+          "E"
+        ],
+        [
+          "G",
+          "H"
+        ]
+      ],
+      "closure_count": 3,
+      "origin": "A",
+      "destination": "I",
+      "original_route": [
+        "A",
+        "D",
+        "E",
+        "H",
+        "I"
+      ],
+      "original_distance": 9,
+      "new_route": [
+        "A",
+        "B",
+        "E",
+        "H",
+        "I"
+      ],
+      "new_distance": 14,
+      "route_reachable": true,
+      "route_detour_pct": 55.5556,
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 67.7775,
+      "maximum_detour_pct": 375.0,
+      "components_after": 1
+    },
+    {
+      "closed_roads": [
+        [
+          "B",
+          "C"
+        ],
+        [
+          "D",
+          "E"
+        ],
+        [
+          "G",
+          "H"
+        ],
+        [
+          "H",
+          "I"
+        ]
+      ],
+      "closure_count": 4,
+      "origin": "A",
+      "destination": "I",
+      "original_route": [
+        "A",
+        "D",
+        "E",
+        "H",
+        "I"
+      ],
+      "original_distance": 9,
+      "new_route": [
+        "A",
+        "B",
+        "E",
+        "F",
+        "I"
+      ],
+      "new_distance": 17,
+      "route_reachable": true,
+      "route_detour_pct": 88.8889,
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 81.9388,
+      "maximum_detour_pct": 375.0,
+      "components_after": 1
+    },
+    {
+      "closed_roads": [
+        [
+          "B",
+          "C"
+        ],
+        [
+          "D",
+          "E"
+        ],
+        [
+          "E",
+          "F"
+        ],
+        [
+          "G",
+          "H"
+        ],
+        [
+          "H",
+          "I"
+        ]
+      ],
+      "closure_count": 5,
+      "origin": "A",
+      "destination": "I",
+      "original_route": [
+        "A",
+        "D",
+        "E",
+        "H",
+        "I"
+      ],
+      "original_distance": 9,
+      "new_route": [],
+      "new_distance": null,
+      "route_reachable": false,
+      "route_detour_pct": null,
+      "reachable_before": 45,
+      "reachable_after": 21,
+      "lost_pairs": 24,
+      "connectivity_loss_pct": 53.3333,
+      "resilience_index": 0.4667,
+      "average_detour_pct": 57.6077,
+      "maximum_detour_pct": 375.0,
+      "components_after": 2
+    }
+  ],
+  "worst_two_road_failures": [
+    {
+      "closed_roads": [
+        [
+          "F",
+          "I"
+        ],
+        [
+          "H",
+          "I"
+        ]
+      ],
+      "closure_count": 2,
+      "origin": "A",
+      "destination": "I",
+      "original_route": [
+        "A",
+        "D",
+        "E",
+        "H",
+        "I"
+      ],
+      "original_distance": 9,
+      "new_route": [],
+      "new_distance": null,
+      "route_reachable": false,
+      "route_detour_pct": null,
+      "reachable_before": 45,
+      "reachable_after": 36,
+      "lost_pairs": 9,
+      "connectivity_loss_pct": 20.0,
+      "resilience_index": 0.8,
+      "average_detour_pct": 2.1629,
+      "maximum_detour_pct": 20.0,
+      "components_after": 2
+    },
+    {
+      "closed_roads": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "D"
+        ]
+      ],
+      "closure_count": 2,
+      "origin": "A",
+      "destination": "I",
+      "original_route": [
+        "A",
+        "D",
+        "E",
+        "H",
+        "I"
+      ],
+      "original_distance": 9,
+      "new_route": [],
+      "new_distance": null,
+      "route_reachable": false,
+      "route_detour_pct": null,
+      "reachable_before": 45,
+      "reachable_after": 36,
+      "lost_pairs": 9,
+      "connectivity_loss_pct": 20.0,
+      "resilience_index": 0.8,
+      "average_detour_pct": 1.6414,
+      "maximum_detour_pct": 50.0,
+      "components_after": 2
+    },
+    {
+      "closed_roads": [
+        [
+          "C",
+          "J"
+        ],
+        [
+          "F",
+          "J"
+        ]
+      ],
+      "closure_count": 2,
+      "origin": "A",
+      "destination": "I",
+      "original_route": [
+        "A",
+        "D",
+        "E",
+        "H",
+        "I"
+      ],
+      "original_distance": 9,
+      "new_route": [
+        "A",
+        "D",
+        "E",
+        "H",
+        "I"
+      ],
+      "new_distance": 9,
+      "route_reachable": true,
+      "route_detour_pct": 0.0,
+      "reachable_before": 45,
+      "reachable_after": 36,
+      "lost_pairs": 9,
+      "connectivity_loss_pct": 20.0,
+      "resilience_index": 0.8,
+      "average_detour_pct": 0.0,
+      "maximum_detour_pct": 0.0,
+      "components_after": 2
+    },
+    {
+      "closed_roads": [
+        [
+          "D",
+          "G"
+        ],
+        [
+          "G",
+          "H"
+        ]
+      ],
+      "closure_count": 2,
+      "origin": "A",
+      "destination": "I",
+      "original_route": [
+        "A",
+        "D",
+        "E",
+        "H",
+        "I"
+      ],
+      "original_distance": 9,
+      "new_route": [
+        "A",
+        "D",
+        "E",
+        "H",
+        "I"
+      ],
+      "new_distance": 9,
+      "route_reachable": true,
+      "route_detour_pct": 0.0,
+      "reachable_before": 45,
+      "reachable_after": 36,
+      "lost_pairs": 9,
+      "connectivity_loss_pct": 20.0,
+      "resilience_index": 0.8,
+      "average_detour_pct": 0.0,
+      "maximum_detour_pct": 0.0,
+      "components_after": 2
+    },
+    {
+      "closed_roads": [
+        [
+          "E",
+          "H"
+        ],
+        [
+          "F",
+          "I"
+        ]
+      ],
+      "closure_count": 2,
+      "origin": "A",
+      "destination": "I",
+      "original_route": [
+        "A",
+        "D",
+        "E",
+        "H",
+        "I"
+      ],
+      "original_distance": 9,
+      "new_route": [
+        "A",
+        "D",
+        "G",
+        "H",
+        "I"
+      ],
+      "new_distance": 13,
+      "route_reachable": true,
+      "route_detour_pct": 44.4444,
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 65.4273,
+      "maximum_detour_pct": 500.0,
+      "components_after": 1
+    }
+  ],
+  "data_source": "simulated"
+}
