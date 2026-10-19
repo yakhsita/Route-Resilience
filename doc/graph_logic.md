@@ -26,6 +26,7 @@ Route-Resilience/
 
 ## Commands 
 
+py -m venv .venv 
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt        # NOTE: install when the venv is activated
 python src/graph/<file_name.py>
