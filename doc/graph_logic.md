@@ -55,4 +55,5 @@ pip install -r requirements.txt        # NOTE: install when the venv is activate
 python src/graph/<file_name.py>
 python -m src.graph.<file_name_consisting_other_file_module>
 python -m pytest tests/ -v
+python -m pip freeze > requirements.txt      # to save all the requirements (in venv.) in the requirements.txt file 
 ```
