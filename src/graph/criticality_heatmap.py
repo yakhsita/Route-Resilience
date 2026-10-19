@@ -154,6 +154,9 @@ def draw_heatmap(
         figsize=(12, 10),
     )
 
+    fig.patch.set_facecolor("white")
+    ax.set_facecolor("white")
+
     if segments:
         collection = LineCollection(
             segments,
