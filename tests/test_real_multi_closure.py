@@ -125,3 +125,29 @@ def test_compare_closure_counts(sample_graph):
         result["closure_count"]
         for result in results
     ] == [1, 2, 3]
+
+
+def test_cumulative_closures(sample_graph):
+    results = compare_closure_counts(
+        sample_graph,
+        "A",
+        "E",
+        counts=(1, 2, 3),
+    )
+
+    first = set(results[0]["closed_edges"])
+    second = set(results[1]["closed_edges"])
+    third = set(results[2]["closed_edges"])
+
+    # Every previous closure must remain closed.
+    assert first.issubset(second)
+    assert second.issubset(third)
+
+    # With more closures, distance cannot decrease.
+    distances = [
+        result["alternative_distance"]
+        for result in results
+    ]
+
+    assert distances == sorted(distances)
+
