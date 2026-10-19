@@ -124,25 +124,51 @@ def compare_closure_counts(
     graph, start, destination, counts=(1, 2, 3)
 ):
     """
-    Compare route disruption for increasing numbers
-    of closures on the same original route.
+    Compare cumulative closure scenarios.
+
+    Scenario 1: first selected road
+    Scenario 2: first two selected roads
+    Scenario 3: first three selected roads
+
+    Each scenario includes all previous closures.
     """
     original_route, _ = dijkstra_osm(
         graph, start, destination, weight="length"
     )
 
     if not original_route:
-        raise ValueError("No route exists.")
+        raise ValueError("No original route exists.")
+
+    if not counts:
+        return []
+
+    if any(
+        not isinstance(count, int) or count < 1
+        for count in counts
+    ):
+        raise ValueError(
+            "Closure counts must be positive integers."
+        )
+
+    # Select all candidate closures only once.
+    maximum_count = max(counts)
+
+    all_closures = select_multiple_closures(
+        graph,
+        original_route,
+        count=maximum_count,
+    )
 
     results = []
 
     for count in counts:
-        closed_edges = select_multiple_closures(
-            graph, original_route, count
-        )
+        closed_edges = all_closures[:count]
 
         result = simulate_multiple_closures(
-            graph, start, destination, closed_edges
+            graph,
+            start,
+            destination,
+            closed_edges,
         )
 
         results.append(result)
