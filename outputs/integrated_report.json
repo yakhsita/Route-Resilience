@@ -1,0 +1,371 @@
+{
+  "network": {
+    "nodes": 10,
+    "edges": 14
+  },
+  "routing": {
+    "origin": "A",
+    "destination": "I",
+    "path": [
+      "A",
+      "D",
+      "E",
+      "H",
+      "I"
+    ],
+    "distance": 9
+  },
+  "criticality": {
+    "bridges": [],
+    "articulation_points": [],
+    "edge_betweenness": [
+      {
+        "road": [
+          "H",
+          "I"
+        ],
+        "score": 0.2444
+      },
+      {
+        "road": [
+          "C",
+          "F"
+        ],
+        "score": 0.2333
+      },
+      {
+        "road": [
+          "F",
+          "I"
+        ],
+        "score": 0.2222
+      },
+      {
+        "road": [
+          "D",
+          "E"
+        ],
+        "score": 0.2111
+      },
+      {
+        "road": [
+          "F",
+          "J"
+        ],
+        "score": 0.2
+      },
+      {
+        "road": [
+          "A",
+          "D"
+        ],
+        "score": 0.1889
+      },
+      {
+        "road": [
+          "E",
+          "H"
+        ],
+        "score": 0.1778
+      },
+      {
+        "road": [
+          "B",
+          "C"
+        ],
+        "score": 0.1444
+      },
+      {
+        "road": [
+          "E",
+          "F"
+        ],
+        "score": 0.1444
+      },
+      {
+        "road": [
+          "G",
+          "H"
+        ],
+        "score": 0.1333
+      },
+      {
+        "road": [
+          "A",
+          "B"
+        ],
+        "score": 0.1222
+      },
+      {
+        "road": [
+          "D",
+          "G"
+        ],
+        "score": 0.0667
+      },
+      {
+        "road": [
+          "B",
+          "E"
+        ],
+        "score": 0.0444
+      },
+      {
+        "road": [
+          "C",
+          "J"
+        ],
+        "score": 0.0
+      }
+    ]
+  },
+  "vulnerability": [
+    {
+      "road": [
+        "A",
+        "D"
+      ],
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 20.942760942760945,
+      "maximum_detour_pct": 550.0,
+      "betweenness": 0.18888888888888888,
+      "vulnerability_score": 45.4545
+    },
+    {
+      "road": [
+        "H",
+        "I"
+      ],
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 15.460477793811128,
+      "maximum_detour_pct": 350.0,
+      "betweenness": 0.24444444444444446,
+      "vulnerability_score": 42.1468
+    },
+    {
+      "road": [
+        "C",
+        "F"
+      ],
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 14.415584415584416,
+      "maximum_detour_pct": 250.0,
+      "betweenness": 0.23333333333333334,
+      "vulnerability_score": 39.7409
+    },
+    {
+      "road": [
+        "D",
+        "E"
+      ],
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 15.463844797178128,
+      "maximum_detour_pct": 266.66666666666663,
+      "betweenness": 0.2111111111111111,
+      "vulnerability_score": 39.4243
+    },
+    {
+      "road": [
+        "F",
+        "J"
+      ],
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 14.53663620330287,
+      "maximum_detour_pct": 250.0,
+      "betweenness": 0.2,
+      "vulnerability_score": 37.187
+    },
+    {
+      "road": [
+        "E",
+        "H"
+      ],
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 15.481481481481483,
+      "maximum_detour_pct": 350.0,
+      "betweenness": 0.17777777777777778,
+      "vulnerability_score": 36.7223
+    },
+    {
+      "road": [
+        "F",
+        "I"
+      ],
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 10.434022767356101,
+      "maximum_detour_pct": 166.66666666666669,
+      "betweenness": 0.22222222222222224,
+      "vulnerability_score": 33.1283
+    },
+    {
+      "road": [
+        "B",
+        "C"
+      ],
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 12.3015873015873,
+      "maximum_detour_pct": 300.0,
+      "betweenness": 0.14444444444444446,
+      "vulnerability_score": 29.4399
+    },
+    {
+      "road": [
+        "G",
+        "H"
+      ],
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 8.24915824915825,
+      "maximum_detour_pct": 150.0,
+      "betweenness": 0.13333333333333333,
+      "vulnerability_score": 22.7258
+    },
+    {
+      "road": [
+        "E",
+        "F"
+      ],
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 5.582010582010582,
+      "maximum_detour_pct": 75.0,
+      "betweenness": 0.14444444444444446,
+      "vulnerability_score": 19.8143
+    },
+    {
+      "road": [
+        "A",
+        "B"
+      ],
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 6.47186147186147,
+      "maximum_detour_pct": 175.0,
+      "betweenness": 0.12222222222222223,
+      "vulnerability_score": 19.2708
+    },
+    {
+      "road": [
+        "D",
+        "G"
+      ],
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 3.2496392496392494,
+      "maximum_detour_pct": 80.0,
+      "betweenness": 0.06666666666666667,
+      "vulnerability_score": 10.1096
+    },
+    {
+      "road": [
+        "B",
+        "E"
+      ],
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 1.6666666666666667,
+      "maximum_detour_pct": 50.0,
+      "betweenness": 0.044444444444444446,
+      "vulnerability_score": 6.0238
+    },
+    {
+      "road": [
+        "C",
+        "J"
+      ],
+      "reachable_before": 45,
+      "reachable_after": 45,
+      "lost_pairs": 0,
+      "connectivity_loss_pct": 0.0,
+      "resilience_index": 1.0,
+      "average_detour_pct": 0.0,
+      "maximum_detour_pct": 0.0,
+      "betweenness": 0.0,
+      "vulnerability_score": 0.0
+    }
+  ],
+  "failure_scenario": {
+    "closed_roads": [
+      [
+        "D",
+        "E"
+      ]
+    ],
+    "closure_count": 1,
+    "origin": "A",
+    "destination": "I",
+    "original_route": [
+      "A",
+      "D",
+      "E",
+      "H",
+      "I"
+    ],
+    "original_distance": 9,
+    "new_route": [
+      "A",
+      "B",
+      "C",
+      "F",
+      "I"
+    ],
+    "new_distance": 12,
+    "route_reachable": true,
+    "route_detour_pct": 33.3333,
+    "reachable_before": 45,
+    "reachable_after": 45,
+    "lost_pairs": 0,
+    "connectivity_loss_pct": 0.0,
+    "resilience_index": 1.0,
+    "average_detour_pct": 15.4638,
+    "maximum_detour_pct": 266.6667,
+    "components_after": 1
+  }
+}
