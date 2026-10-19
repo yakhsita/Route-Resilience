@@ -1,0 +1,366 @@
+{
+  "analysis": "sampled_directed_edge_criticality",
+  "closure_type": "hypothetical",
+  "results": [
+    {
+      "edge": [
+        245613696,
+        1617742453,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 1299.74,
+      "average_detour_percent": 2.42
+    },
+    {
+      "edge": [
+        61746203,
+        1391210501,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 1260.57,
+      "average_detour_percent": 3.29
+    },
+    {
+      "edge": [
+        303931703,
+        7263010437,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 1008.55,
+      "average_detour_percent": 1.78
+    },
+    {
+      "edge": [
+        260911861,
+        11809900885,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 948.93,
+      "average_detour_percent": 1.76
+    },
+    {
+      "edge": [
+        61746203,
+        669247515,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 936.32,
+      "average_detour_percent": 1.69
+    },
+    {
+      "edge": [
+        245613696,
+        10043935988,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 871.24,
+      "average_detour_percent": 3.41
+    },
+    {
+      "edge": [
+        263227126,
+        1469644231,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 546.16,
+      "average_detour_percent": 0.86
+    },
+    {
+      "edge": [
+        61746220,
+        3740957813,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 510.53,
+      "average_detour_percent": 0.8
+    },
+    {
+      "edge": [
+        17327139,
+        14206154055,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 393.23,
+      "average_detour_percent": 1.13
+    },
+    {
+      "edge": [
+        61746221,
+        10068956864,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 335.54,
+      "average_detour_percent": 0.51
+    },
+    {
+      "edge": [
+        260729388,
+        3452278572,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 316.41,
+      "average_detour_percent": 0.49
+    },
+    {
+      "edge": [
+        260729385,
+        7265495340,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 313.66,
+      "average_detour_percent": 0.49
+    },
+    {
+      "edge": [
+        304956059,
+        363765940,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 299.93,
+      "average_detour_percent": 0.43
+    },
+    {
+      "edge": [
+        260729389,
+        11892969975,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 299.5,
+      "average_detour_percent": 0.46
+    },
+    {
+      "edge": [
+        254920217,
+        308920401,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 147.01,
+      "average_detour_percent": 0.42
+    },
+    {
+      "edge": [
+        254920166,
+        254920223,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 122.05,
+      "average_detour_percent": 0.18
+    },
+    {
+      "edge": [
+        254920223,
+        17327139,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 122.05,
+      "average_detour_percent": 0.18
+    },
+    {
+      "edge": [
+        304956059,
+        3399098253,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 106.39,
+      "average_detour_percent": 0.24
+    },
+    {
+      "edge": [
+        17327141,
+        956271740,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 104.61,
+      "average_detour_percent": 0.33
+    },
+    {
+      "edge": [
+        301348248,
+        263226936,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 99.89,
+      "average_detour_percent": 0.48
+    },
+    {
+      "edge": [
+        303931711,
+        14206154060,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 99.62,
+      "average_detour_percent": 0.29
+    },
+    {
+      "edge": [
+        301350890,
+        363771007,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 51.53,
+      "average_detour_percent": 0.11
+    },
+    {
+      "edge": [
+        61746218,
+        11853713921,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 19.75,
+      "average_detour_percent": 0.03
+    },
+    {
+      "edge": [
+        301347812,
+        301348248,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 15.83,
+      "average_detour_percent": 0.08
+    },
+    {
+      "edge": [
+        303933201,
+        305144597,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 9.26,
+      "average_detour_percent": 0.02
+    },
+    {
+      "edge": [
+        17327141,
+        956271706,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 6.87,
+      "average_detour_percent": 0.01
+    },
+    {
+      "edge": [
+        304955848,
+        309593051,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 6.4,
+      "average_detour_percent": 0.01
+    },
+    {
+      "edge": [
+        304955780,
+        304956037,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 5.62,
+      "average_detour_percent": 0.01
+    },
+    {
+      "edge": [
+        304956037,
+        304955848,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 5.62,
+      "average_detour_percent": 0.01
+    },
+    {
+      "edge": [
+        304956289,
+        304955780,
+        0
+      ],
+      "journeys_evaluated": 20,
+      "lost_journeys": 0,
+      "connectivity_loss_percent": 0.0,
+      "total_extra_metres": 5.62,
+      "average_detour_percent": 0.01
+    }
+  ]
+}
