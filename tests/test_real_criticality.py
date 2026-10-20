@@ -123,3 +123,25 @@ def test_save_report(tmp_path):
 
     assert data["closure_type"] == "hypothetical"
     assert data["results"] == []
+
+
+def test_candidates_prioritized_by_route_frequency():
+    graph = nx.MultiDiGraph()
+
+    graph.add_edge("A", "B", length=2)
+    graph.add_edge("B", "C", length=2)
+    graph.add_edge("C", "D", length=2)
+
+    journeys, candidates = prepare_journeys(
+        graph,
+        [
+            ("A", "C"),
+            ("A", "D"),
+            ("B", "D"),
+        ],
+    )
+
+    assert len(journeys) == 3
+
+    # B -> C is used by all three journeys.
+    assert candidates[0] == ("B", "C", 0)
