@@ -19,6 +19,7 @@ from src.graph.directed_closure import (
     close_directed_edges,
     find_route_edges,
 )
+from collections import Counter
 
 GRAPH_PATH = Path(
     "G:/Route-Resilience/data/raw/koramangala_roads.graphml"
@@ -58,17 +59,21 @@ def sample_od_pairs(graph, count=20, seed=42):
     return sorted(pairs)
 
 
+
 def prepare_journeys(graph, od_pairs):
     """
-    Calculate baseline routes once and collect the
-    directed edges used by those routes.
+    Calculate baseline journeys and count how often
+    each exact directed edge appears on their routes.
     """
     journeys = []
-    candidate_edges = set()
+    edge_usage = Counter()
 
     for start, destination in od_pairs:
         route, distance = dijkstra_osm(
-            graph, start, destination, weight="length"
+            graph,
+            start,
+            destination,
+            weight="length",
         )
 
         if not route or not math.isfinite(distance):
@@ -80,11 +85,21 @@ def prepare_journeys(graph, od_pairs):
             "baseline_distance": distance,
         })
 
-        candidate_edges.update(
-            find_route_edges(graph, route)
-        )
+        route_edges = find_route_edges(graph, route)
+        edge_usage.update(route_edges)
 
-    return journeys, sorted(candidate_edges)
+    candidates = [
+        edge
+        for edge, frequency in sorted(
+            edge_usage.items(),
+            key=lambda item: (
+                -item[1],
+                item[0],
+            ),
+        )
+    ]
+
+    return journeys, candidates
 
 
 def evaluate_candidate(graph, journeys, closed_edge):
@@ -159,7 +174,7 @@ def rank_critical_roads(
         graph, od_pairs
     )
 
-    # Deterministic initial subset for a bounded demo.
+    # Evaluate the most frequently used directed edges.
     selected = candidates[:max_candidates]
 
     results = [
@@ -207,7 +222,7 @@ def main():
     print("Directed edges:", graph.number_of_edges())
 
     pairs = sample_od_pairs(
-        graph, count=20, seed=42
+        graph, count=100, seed=42
     )
 
     print("Sampled journeys:", len(pairs))
@@ -215,7 +230,7 @@ def main():
     results = rank_critical_roads(
         graph,
         pairs,
-        max_candidates=30,
+        max_candidates=50,
     )
 
     print("\n===== TOP 10 CRITICAL ROAD EDGES =====")
